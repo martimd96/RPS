@@ -7,7 +7,8 @@ def player(prev_play, opponent_history=[]):
     ideal_plays = {'P': 'S', 'R': 'P', 'S': 'R'} 
 
     guess = "R"
-    if len(opponent_history) > 4 and opponent_history[:5] == quincy_pattern:
+    if len(opponent_history) > 4 and (opponent_history[:5] == quincy_pattern):
+        print ("Detected Quincy!")
         last_two = opponent_history[-2:]
         if last_two == ['P', 'P']:
             guess = ideal_plays['S']
