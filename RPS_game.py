@@ -45,14 +45,14 @@ def play(player1, player2, num_games, verbose=False):
     return (win_rate)
 
 
-def quincy(prev_play, counter=[0]):
+def quincy(prev_play, counter=[0]): # Cycles through R, R, P, P, S
 
     counter[0] += 1
     choices = ["R", "R", "P", "P", "S"]
     return choices[counter[0] % len(choices)]
 
 
-def mrugesh(prev_opponent_play, opponent_history=[]):
+def mrugesh(prev_opponent_play, opponent_history=[]): # Tracks opponent's last 10 plays. Plays one that would beat their most frequent play
     opponent_history.append(prev_opponent_play)
     last_ten = opponent_history[-10:]
     most_frequent = max(set(last_ten), key=last_ten.count)
@@ -64,14 +64,14 @@ def mrugesh(prev_opponent_play, opponent_history=[]):
     return ideal_response[most_frequent]
 
 
-def kris(prev_opponent_play):
+def kris(prev_opponent_play):  # Always plays the move that would beat the opponent's last move
     if prev_opponent_play == '':
         prev_opponent_play = "R"
     ideal_response = {'P': 'S', 'R': 'P', 'S': 'R'}
     return ideal_response[prev_opponent_play]
 
 
-def abbey(prev_opponent_play,
+def abbey(prev_opponent_play, # Predicts opponent's next move based on their last two moves by chosing the most frequent response to that sequence in the past
           opponent_history=[],
           play_order=[{
               "RR": 0,
