@@ -4,11 +4,13 @@ def player(prev_play, opponent_history=[]):
     opponent_history.append(prev_play)
 
     quincy_pattern = ['R', 'R', 'P', 'P', 'S']
+    kris_pattern = ['P', 'P', 'S', 'R', 'P']
     ideal_plays = {'P': 'S', 'R': 'P', 'S': 'R'} 
+    moves = ['R', 'P', 'S']
 
-    guess = "R"
-    if len(opponent_history) > 4 and (opponent_history[:5] == quincy_pattern):
-        print ("Detected Quincy!")
+    #print(opponent_history[0:10])
+    guess = moves[(len(opponent_history) - 1) % 3]
+    if len(opponent_history) > 10 and (opponent_history[5:10] == quincy_pattern):
         last_two = opponent_history[-2:]
         if last_two == ['P', 'P']:
             guess = ideal_plays['S']
@@ -17,7 +19,14 @@ def player(prev_play, opponent_history=[]):
         elif last_two == ['P', 'S']:
             guess = ideal_plays['R']
         else:
-            guess = ideal_plays[opponent_history[-1]]
+            last_move = opponent_history[-1]
+            if last_move == '':
+                guess = 'P'  # Default move for first turn
+            else:
+                guess = ideal_plays[last_move]
+    elif len(opponent_history) > 1 and (opponent_history[1:6] == kris_pattern):
+        moves2 = ['S', 'P', 'R']
+        guess = moves2[(len(opponent_history) - 1) % 3]
 
        
 
