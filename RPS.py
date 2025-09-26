@@ -30,7 +30,7 @@ def player(prev_play, opponent_history=[]):
         guess = moves2[(len(opponent_history) - 1) % 3]
     elif len(opponent_history) > 5 and (opponent_history[1:6] == mrugesh_pattern):
         guess = ideal_plays[opponent_history[-1]]
-    elif len(opponent_history) > 5 and (opponent_history[1:6] == abbey_pattern):
+    elif len(opponent_history) > 5 and (opponent_history[1:6] == abbey_pattern): #Manual markov chain basically done by hand and hardcoded
         if 6 <= len(opponent_history) <= 27:
             pattern_list = list("RSSPPPRPRRSPSPPRPSRRSS")
             guess = ideal_plays[pattern_list[(len(opponent_history) - 6)]]
